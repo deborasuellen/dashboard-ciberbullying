@@ -3,115 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Ciberbullying — Brasil 2020–2026</title>
+    <title>Dashboard Ciberbullying — Brasil 2020-2026</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #0f172a; color: #e2e8f0; }
-        header { background: linear-gradient(135deg, #1e2937, #334155); padding: 3rem 2rem; text-align: center; }
-        h1 { font-size: 3rem; margin: 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        section { margin-bottom: 4rem; background: #1e2937; padding: 2rem; border-radius: 12px; }
-        .nav { display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0; }
-        .nav a { color: #60a5fa; text-decoration: none; }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .highlight { background: #334155; padding: 1.5rem; border-radius: 8px; text-align: center; }
-        canvas { max-width: 100%; }
+        :root {
+            --primary: #f87171;
+            --dark: #0f172a;
+            --card: #1e2937;
+        }
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            margin: 0; 
+            background: var(--dark); 
+            color: #e2e8f0; 
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1e2937, #334155);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+        }
+        h1 { font-size: 3.2rem; margin: 0; color: var(--primary); }
+        .container { max-width: 1300px; margin: 0 auto; padding: 2rem; }
+        section { 
+            background: var(--card); 
+            padding: 2.5rem; 
+            border-radius: 16px; 
+            margin-bottom: 3rem; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .nav {
+            display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0; font-size: 1.1rem;
+        }
+        .nav a { color: #60a5fa; text-decoration: none; font-weight: 500; }
+        .nav a:hover { color: var(--primary); }
+        .highlight {
+            background: #334155; padding: 2rem; border-radius: 12px; text-align: center;
+        }
+        .card-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+        }
+        img { max-width: 100%; border-radius: 12px; }
+        footer { text-align: center; padding: 3rem; opacity: 0.8; }
     </style>
 </head>
 <body>
     <header>
         <h1>Dashboard Ciberbullying</h1>
-        <p style="font-size: 1.5rem; margin: 1rem 0;">Análise de Casos e Denúncias no Brasil — 2020 a junho/2026</p>
-        <p>Impacto, perfis por idade, plataforma e evolução temporal</p>
+        <p style="font-size: 1.8rem; margin-top: 1rem;">Análise de Denúncias de Violência Online no Brasil • 2020–2026</p>
+        <p>Projeto PAD-UNB • Ciência de Dados aplicada ao Direito</p>
     </header>
 
     <div class="container">
         <div class="nav">
             <a href="#metodo">Metodologia</a>
             <a href="#perfil">Perfil Geral</a>
-            <a href="#heatmap">Mapa de Calor</a>
             <a href="#evolucao">Evolução Temporal</a>
-            <a href="#volume">Volume por Plataforma</a>
-            <a href="#regiao">Por Região</a>
+            <a href="#plataformas">Por Plataforma</a>
+            <a href="#regioes">Por Região</a>
+            <a href="#vitimas">Perfil das Vítimas</a>
         </div>
 
         <section id="metodo">
-            <h2>00 — Metodologia</h2>
-            <p>Fonte: Dados abertos de denúncias (SaferNet, Ministério Público, relatórios anuais). Classificação de casos graves, vítimas por faixa etária, plataformas principais (Instagram, WhatsApp, TikTok, etc.).</p>
+            <h2>Metodologia</h2>
+            <p>Dados extraídos de fontes oficiais (SaferNet, Anuário Brasileiro de Segurança Pública). Processamento realizado com Python (pandas, plotly, matplotlib). Dashboard interativo hospedado no GitHub Pages.</p>
         </section>
 
-        <section id="perfil">
-            <h2>01 — Perfil Geral</h2>
-            <div class="card-grid">
-                <div class="highlight">
-                    <h3>Total de Denúncias</h3>
-                    <p style="font-size: 2.5rem; color: #f87171;">187.450</p>
-                </div>
-                <div class="highlight">
-                    <h3>Vítimas 10-17 anos</h3>
-                    <p style="font-size: 2.5rem; color: #60a5fa;">68%</p>
-                </div>
+        <section id="perfil" class="card-grid">
+            <div class="highlight">
+                <h3>Total de Denúncias</h3>
+                <p style="font-size: 3.5rem; color: var(--primary); margin: 0;">170.000</p>
             </div>
-            <canvas id="perfilChart" height="120"></canvas>
-        </section>
-
-        <section id="heatmap">
-            <h2>02 — Mapa de Calor: Taxa por Plataforma e Ano</h2>
-            <canvas id="heatmapChart"></canvas>
+            <div class="highlight">
+                <h3>Vítimas 10-17 anos</h3>
+                <p style="font-size: 3.5rem; color: #60a5fa; margin: 0;">68%</p>
+            </div>
+            <div class="highlight">
+                <h3>Plataforma dominante</h3>
+                <p style="font-size: 2.4rem; color: var(--primary);">Instagram</p>
+            </div>
         </section>
 
         <section id="evolucao">
-            <h2>03 — Evolução Anual</h2>
-            <canvas id="evolucaoChart" height="400"></canvas>
+            <h2>Evolução Temporal de Denúncias</h2>
+            <canvas id="evolucaoChart" height="120"></canvas>
+            <img src="output/evolucao_temporal.png" alt="Gráfico gerado pelo Python" style="margin-top: 20px;">
         </section>
 
-        <section id="volume">
-            <h2>04 — Volume por Plataforma</h2>
-            <canvas id="volumeChart"></canvas>
+        <section id="plataformas">
+            <h2>Distribuição por Plataforma</h2>
+            <canvas id="plataformaChart" height="140"></canvas>
+            <img src="output/distribuicao_plataformas.png" alt="Gráfico Python" style="margin-top: 20px;">
         </section>
 
-        <footer style="text-align:center; padding: 3rem; opacity: 0.7;">
-            <p>Dashboard inspirado em análises judiciais • Tema Ciberbullying • Hospedado no GitHub Pages</p>
+        <section id="regioes">
+            <h2>Denúncias por Região</h2>
+            <img src="output/denuncias_por_regiao.png" alt="Por Região" style="margin-top: 10px;">
+        </section>
+
+        <footer>
+            <p>Dashboard Ciberbullying • Desenvolvido por Deborah Suellen • 2026</p>
+            <p><a href="https://github.com/deborasuellen/dashboard-ciberbullying" style="color: #60a5fa;">Ver código no GitHub</a></p>
         </footer>
     </div>
 
     <script>
-        // Perfil Geral - Bar Chart
-        new Chart(document.getElementById('perfilChart'), {
-            type: 'bar',
+        // Gráfico Evolução (Chart.js)
+        new Chart(document.getElementById('evolucaoChart'), {
+            type: 'line',
             data: {
-                labels: ['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Outros'],
+                labels: ['2020','2021','2022','2023','2024','2025','2026'],
                 datasets: [{
-                    label: '% de Casos',
-                    data: [42, 28, 15, 8, 7],
-                    backgroundColor: ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa']
+                    label: 'Denúncias',
+                    data: [8500, 14200, 21800, 29500, 34100, 39800, 22100],
+                    borderColor: '#f87171',
+                    backgroundColor: 'rgba(248, 113, 113, 0.2)',
+                    tension: 0.4,
+                    borderWidth: 5
                 }]
             },
             options: { responsive: true, plugins: { legend: { display: false } } }
         });
 
-        // Evolução Temporal - Line Chart
-        new Chart(document.getElementById('evolucaoChart'), {
-            type: 'line',
+        // Gráfico Plataformas
+        new Chart(document.getElementById('plataformaChart'), {
+            type: 'bar',
             data: {
-                labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+                labels: ['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Outros'],
                 datasets: [{
-                    label: 'Denúncias Anuais',
-                    data: [8500, 14200, 21800, 29500, 34100, 39800, 22100],
-                    borderColor: '#f87171',
-                    tension: 0.4
+                    label: 'Porcentagem',
+                    data: [42, 28, 15, 8, 7],
+                    backgroundColor: '#f87171'
                 }]
             },
             options: { responsive: true }
-        });
-
-        // Volume por Plataforma - Pie
-        new Chart(document.getElementById('volumeChart'), {
-            type: 'pie',
-            data: {
-                labels: ['Instagram', 'WhatsApp', 'TikTok', 'Facebook'],
-                datasets: [{ data: [42, 28, 15, 8], backgroundColor: ['#f87171', '#60a5fa', '#34d399', '#fbbf24'] }]
-            }
         });
     </script>
 </body>
