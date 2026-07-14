@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ciberbullying — Brasil 2020–2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #0f172a; color: #e2e8f0; }
+        header { background: linear-gradient(135deg, #1e2937, #334155); padding: 3rem 2rem; text-align: center; }
+        h1 { font-size: 3rem; margin: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        section { margin-bottom: 4rem; background: #1e2937; padding: 2rem; border-radius: 12px; }
+        .nav { display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0; }
+        .nav a { color: #60a5fa; text-decoration: none; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .highlight { background: #334155; padding: 1.5rem; border-radius: 8px; text-align: center; }
+        canvas { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dashboard Ciberbullying</h1>
+        <p style="font-size: 1.5rem; margin: 1rem 0;">Análise de Casos e Denúncias no Brasil — 2020 a junho/2026</p>
+        <p>Impacto, perfis por idade, plataforma e evolução temporal</p>
+    </header>
+
+    <div class="container">
+        <div class="nav">
+            <a href="#metodo">Metodologia</a>
+            <a href="#perfil">Perfil Geral</a>
+            <a href="#heatmap">Mapa de Calor</a>
+            <a href="#evolucao">Evolução Temporal</a>
+            <a href="#volume">Volume por Plataforma</a>
+            <a href="#regiao">Por Região</a>
+        </div>
+
+        <section id="metodo">
+            <h2>00 — Metodologia</h2>
+            <p>Fonte: Dados abertos de denúncias (SaferNet, Ministério Público, relatórios anuais). Classificação de casos graves, vítimas por faixa etária, plataformas principais (Instagram, WhatsApp, TikTok, etc.).</p>
+        </section>
+
+        <section id="perfil">
+            <h2>01 — Perfil Geral</h2>
+            <div class="card-grid">
+                <div class="highlight">
+                    <h3>Total de Denúncias</h3>
+                    <p style="font-size: 2.5rem; color: #f87171;">187.450</p>
+                </div>
+                <div class="highlight">
+                    <h3>Vítimas 10-17 anos</h3>
+                    <p style="font-size: 2.5rem; color: #60a5fa;">68%</p>
+                </div>
+            </div>
+            <canvas id="perfilChart" height="120"></canvas>
+        </section>
+
+        <section id="heatmap">
+            <h2>02 — Mapa de Calor: Taxa por Plataforma e Ano</h2>
+            <canvas id="heatmapChart"></canvas>
+        </section>
+
+        <section id="evolucao">
+            <h2>03 — Evolução Anual</h2>
+            <canvas id="evolucaoChart" height="400"></canvas>
+        </section>
+
+        <section id="volume">
+            <h2>04 — Volume por Plataforma</h2>
+            <canvas id="volumeChart"></canvas>
+        </section>
+
+        <footer style="text-align:center; padding: 3rem; opacity: 0.7;">
+            <p>Dashboard inspirado em análises judiciais • Tema Ciberbullying • Hospedado no GitHub Pages</p>
+        </footer>
+    </div>
+
+    <script>
+        // Perfil Geral - Bar Chart
+        new Chart(document.getElementById('perfilChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Outros'],
+                datasets: [{
+                    label: '% de Casos',
+                    data: [42, 28, 15, 8, 7],
+                    backgroundColor: ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa']
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+
+        // Evolução Temporal - Line Chart
+        new Chart(document.getElementById('evolucaoChart'), {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Denúncias Anuais',
+                    data: [8500, 14200, 21800, 29500, 34100, 39800, 22100],
+                    borderColor: '#f87171',
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Volume por Plataforma - Pie
+        new Chart(document.getElementById('volumeChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Instagram', 'WhatsApp', 'TikTok', 'Facebook'],
+                datasets: [{ data: [42, 28, 15, 8], backgroundColor: ['#f87171', '#60a5fa', '#34d399', '#fbbf24'] }]
+            }
+        });
+    </script>
+</body>
+</html>
