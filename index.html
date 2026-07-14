@@ -11,54 +11,95 @@
             --primary: #f87171;
             --dark: #0f172a;
             --card: #1e2937;
+            --accent: #60a5fa;
         }
+        * { box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', system-ui, sans-serif; 
             margin: 0; 
             background: var(--dark); 
             color: #e2e8f0; 
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
         header {
             background: linear-gradient(135deg, #1e2937, #334155);
-            padding: 4rem 2rem;
+            padding: 4rem 1rem;
             text-align: center;
-            border-bottom: 4px solid var(--primary);
+            border-bottom: 5px solid var(--primary);
         }
-        h1 { font-size: 3.2rem; margin: 0; color: var(--primary); }
-        .container { max-width: 1300px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); margin: 0; color: var(--primary); }
+        .container { max-width: 1350px; margin: 0 auto; padding: 1.5rem; }
+        
+        .nav {
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 1.2rem; 
+            justify-content: center;
+            margin: 2rem 0;
+            background: #1e2937;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+        .nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .nav a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
         section { 
             background: var(--card); 
             padding: 2.5rem; 
             border-radius: 16px; 
-            margin-bottom: 3rem; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        .nav {
-            display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0; font-size: 1.1rem;
-        }
-        .nav a { color: #60a5fa; text-decoration: none; font-weight: 500; }
-        .nav a:hover { color: var(--primary); }
-        .highlight {
-            background: #334155; padding: 2rem; border-radius: 12px; text-align: center;
+            margin-bottom: 2.5rem; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         .card-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem;
         }
-        img { max-width: 100%; border-radius: 12px; }
-        footer { text-align: center; padding: 3rem; opacity: 0.8; }
+        .highlight {
+            background: #334155; 
+            padding: 2rem; 
+            border-radius: 12px; 
+            text-align: center;
+        }
+        canvas { max-width: 100% !important; height: auto !important; }
+        img { max-width: 100%; border-radius: 12px; margin-top: 15px; }
+
+        footer { 
+            text-align: center; 
+            padding: 3rem 1rem; 
+            opacity: 0.85; 
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav { flex-direction: column; align-items: center; }
+            section { padding: 2rem 1.5rem; }
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Dashboard Ciberbullying</h1>
-        <p style="font-size: 1.8rem; margin-top: 1rem;">Análise de Denúncias de Violência Online no Brasil • 2020–2026</p>
+        <p style="font-size: 1.7rem; margin: 1rem 0 0;">Análise de Denúncias de Violência Online no Brasil • 2020–2026</p>
         <p>Projeto PAD-UNB • Ciência de Dados aplicada ao Direito</p>
     </header>
 
     <div class="container">
+        <!-- Menu com Smooth Scroll -->
         <div class="nav">
-            <a href="#metodo">Metodologia</a>
+            <a href="#metodologia">Metodologia</a>
             <a href="#perfil">Perfil Geral</a>
             <a href="#evolucao">Evolução Temporal</a>
             <a href="#plataformas">Por Plataforma</a>
@@ -66,51 +107,69 @@
             <a href="#vitimas">Perfil das Vítimas</a>
         </div>
 
-        <section id="metodo">
-            <h2>Metodologia</h2>
-            <p>Dados extraídos de fontes oficiais (SaferNet, Anuário Brasileiro de Segurança Pública). Processamento realizado com Python (pandas, plotly, matplotlib). Dashboard interativo hospedado no GitHub Pages.</p>
+        <section id="metodologia">
+            <h2>00 — Metodologia</h2>
+            <p>Dados oficiais (SaferNet + Anuário Brasileiro de Segurança Pública). Processamento em Python (pandas, matplotlib, plotly) e visualização interativa com Chart.js. Projeto open-source e reprodutível.</p>
         </section>
 
         <section id="perfil" class="card-grid">
             <div class="highlight">
                 <h3>Total de Denúncias</h3>
-                <p style="font-size: 3.5rem; color: var(--primary); margin: 0;">170.000</p>
+                <p style="font-size: 3.8rem; color: var(--primary); margin: 0.3rem 0 0;">170.000</p>
             </div>
             <div class="highlight">
-                <h3>Vítimas 10-17 anos</h3>
-                <p style="font-size: 3.5rem; color: #60a5fa; margin: 0;">68%</p>
+                <h3>Adolescentes (10-17 anos)</h3>
+                <p style="font-size: 3.8rem; color: var(--accent); margin: 0.3rem 0 0;">68%</p>
             </div>
             <div class="highlight">
-                <h3>Plataforma dominante</h3>
-                <p style="font-size: 2.4rem; color: var(--primary);">Instagram</p>
+                <h3>Plataforma mais usada</h3>
+                <p style="font-size: 2.6rem; color: var(--primary);">Instagram</p>
             </div>
         </section>
 
         <section id="evolucao">
-            <h2>Evolução Temporal de Denúncias</h2>
-            <canvas id="evolucaoChart" height="120"></canvas>
-            <img src="output/evolucao_temporal.png" alt="Gráfico gerado pelo Python" style="margin-top: 20px;">
+            <h2>01 — Evolução Temporal</h2>
+            <canvas id="evolucaoChart" height="140"></canvas>
+            <img src="output/evolucao_temporal.png" alt="Gráfico Python">
         </section>
 
         <section id="plataformas">
-            <h2>Distribuição por Plataforma</h2>
-            <canvas id="plataformaChart" height="140"></canvas>
-            <img src="output/distribuicao_plataformas.png" alt="Gráfico Python" style="margin-top: 20px;">
+            <h2>02 — Distribuição por Plataforma</h2>
+            <canvas id="plataformaChart" height="160"></canvas>
+            <img src="output/distribuicao_plataformas.png" alt="Gráfico Python">
         </section>
 
         <section id="regioes">
-            <h2>Denúncias por Região</h2>
-            <img src="output/denuncias_por_regiao.png" alt="Por Região" style="margin-top: 10px;">
+            <h2>03 — Denúncias por Região</h2>
+            <img src="output/denuncias_por_regiao.png" alt="Por Região">
+        </section>
+
+        <section id="vitimas">
+            <h2>04 — Perfil das Vítimas por Faixa Etária</h2>
+            <canvas id="vitimasChart" height="160"></canvas>
         </section>
 
         <footer>
-            <p>Dashboard Ciberbullying • Desenvolvido por Deborah Suellen • 2026</p>
-            <p><a href="https://github.com/deborasuellen/dashboard-ciberbullying" style="color: #60a5fa;">Ver código no GitHub</a></p>
+            <p>Dashboard Ciberbullying • Deborah Suellen • 2026</p>
+            <p>
+                <a href="https://github.com/deborasuellen/dashboard-ciberbullying" style="color: var(--accent);">Ver repositório no GitHub</a>
+            </p>
         </footer>
     </div>
 
     <script>
-        // Gráfico Evolução (Chart.js)
+        // Smooth Scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Gráfico Evolução
         new Chart(document.getElementById('evolucaoChart'), {
             type: 'line',
             data: {
@@ -119,22 +178,36 @@
                     label: 'Denúncias',
                     data: [8500, 14200, 21800, 29500, 34100, 39800, 22100],
                     borderColor: '#f87171',
-                    backgroundColor: 'rgba(248, 113, 113, 0.2)',
+                    backgroundColor: 'rgba(248, 113, 113, 0.15)',
                     tension: 0.4,
-                    borderWidth: 5
+                    borderWidth: 5,
+                    pointRadius: 5
                 }]
             },
-            options: { responsive: true, plugins: { legend: { display: false } } }
+            options: { responsive: true, plugins: { legend: { display: false }}}
         });
 
         // Gráfico Plataformas
         new Chart(document.getElementById('plataformaChart'), {
-            type: 'bar',
+            type: 'doughnut',
             data: {
                 labels: ['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Outros'],
                 datasets: [{
-                    label: 'Porcentagem',
                     data: [42, 28, 15, 8, 7],
+                    backgroundColor: ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa']
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Gráfico Vítimas por Faixa Etária
+        new Chart(document.getElementById('vitimasChart'), {
+            type: 'bar',
+            data: {
+                labels: ['10-13 anos', '14-17 anos', '18-24 anos', '25+ anos'],
+                datasets: [{
+                    label: 'Porcentagem',
+                    data: [32, 36, 21, 11],
                     backgroundColor: '#f87171'
                 }]
             },
