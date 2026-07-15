@@ -1,6 +1,6 @@
 # Dashboard Ciberbullying — Brasil 2020–2026
 
-**Projeto de Análise de Dados (PAD) – Estilo UNB**
+**Projeto de Análise de Dados (PAD)**
 
 Análise exploratória de denúncias de cyberbullying no Brasil com base em dados públicos (SaferNet, Anuário Brasileiro de Segurança Pública e Ministério Público).
 
